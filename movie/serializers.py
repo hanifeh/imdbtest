@@ -1,12 +1,13 @@
-
 from rest_framework import serializers
 from . import models
+from genre.serializers import GenreSerializer
 
 
-class OrganizationSerializer(serializers.ModelSerializer):
+class MovieSerializer(serializers.ModelSerializer):
     """
     Serializer class for Movie
     """
+    # genre = GenreSerializer(many=True)
 
     class Meta:
         model = models.Movie

@@ -1,9 +1,8 @@
-
 from rest_framework import serializers
 from . import models
 
 
-class OrganizationSerializer(serializers.ModelSerializer):
+class GenreSerializer(serializers.ModelSerializer):
     """
     Serializer class for genre
     """
