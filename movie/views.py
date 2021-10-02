@@ -1,6 +1,8 @@
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.viewsets import ModelViewSet
 from rest_framework import filters
+from rest_framework_simplejwt.authentication import JWTAuthentication
+
 from movie import serializers, models
 
 
@@ -10,6 +12,7 @@ class MovieViewSetAPI(ModelViewSet):
     """
     serializer_class = serializers.MovieSerializer
     queryset = models.Movie.objects.all()
+    authentication_classes = [JWTAuthentication]
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
     search_fields = ['name', 'created_date', 'director']
     ordering_fields = ['name', 'created_date', 'director']
