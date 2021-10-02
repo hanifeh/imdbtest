@@ -10,9 +10,12 @@ class Review(models.Model):
     """
     movie = models.ForeignKey(Movie, on_delete=models.PROTECT)
     writer = models.ForeignKey(get_user_model(), on_delete=models.PROTECT)
-    created_date = models.DateField(auto_now_add=True)
+    created_date = models.DateTimeField(auto_now_add=True)
     rate = models.PositiveIntegerField(validators=[MinValueValidator(0), MaxValueValidator(10)])
     body = models.TextField()
 
+    class Meta:
+        unique_together = [['movie', 'writer']]
+
     def __str__(self):
-        return self.writer
+        return f"{self.writer} {self.movie}"
