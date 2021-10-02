@@ -1,10 +1,7 @@
-import django_filters.rest_framework
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.viewsets import ModelViewSet
 from rest_framework import filters
 from movie import serializers, models
-
-
 
 
 class MovieViewSetAPI(ModelViewSet):
@@ -13,8 +10,9 @@ class MovieViewSetAPI(ModelViewSet):
     """
     serializer_class = serializers.MovieSerializer
     queryset = models.Movie.objects.all()
-    filter_backends = [filters.SearchFilter]
-    search_fields = ['name', 'created_date']
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ['name', 'created_date', 'director']
+    ordering_fields = ['name', 'created_date', 'director']
 
     def get_permissions(self):
         """
