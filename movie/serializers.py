@@ -22,7 +22,6 @@ class MovieSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
-        print(models.Genre.objects.get(movie=instance))
-        representation['genre'] = model_to_dict(models.Genre.objects.get(movie=instance))
+        representation['genre'] = GenreSerializer(instance.genre, many=True).data
         representation['review_rate'] = representation.pop('get_review_rate')
         return representation
